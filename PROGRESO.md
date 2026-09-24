@@ -51,8 +51,13 @@ Cadena: **Proveedor (ultra admin) → Empresas de pérgolas (usuarios) → Clien
 - Al enviar: toast, pantalla de confirmación con el número de pedido y atajo que cambia a rol Admin y abre el pedido recién creado.
 - Botón de WhatsApp con el resumen prellenado y botón de PDF que muestra su DevNotice.
 
+### Bloque 7 — Panel Admin (proveedor)
+- Sidebar limpia con Dashboard · Empresas · Pedidos, contador de pedidos nuevos, datos del proveedor, role switcher y logout. En mobile pasa a drawer.
+- **Dashboard**: 4 KPIs clicables (empresas activas/inactivas, pedidos del mes, material más pedido) y 3 gráficos Recharts (pedidos por mes, empresas por actividad, top materiales). El mes en curso suma los pedidos creados en la demo.
+- **Empresas**: tabla con estado, plan, último acceso y cantidad de pedidos, buscador y filtros activo/inactivo; click abre el detalle con contacto, región y últimos pedidos.
+- **Pedidos**: lista con empresa, cliente final, configuración, fecha, total y estado; los creados en la demo aparecen primero, resaltados con "Creado en esta sesión". El detalle muestra el despiece completo y permite cambiar el estado con toast.
+
 ## 🔜 Pendiente
-- Bloque 7 — Panel Admin.
 - Bloque 8 — DevNotices, QA de i18n, mobile 375px y performance del canvas.
 
 ## 🧭 Decisiones
