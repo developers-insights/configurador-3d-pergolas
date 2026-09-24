@@ -57,11 +57,14 @@ export default function SolsticeConfigurator() {
 
   const total = useMemo(() => totalDespiece(calcularDespiece(cfg)), [cfg])
   // El encuadre sólo se calcula al montar: después manda OrbitControls.
-  const [encuadre] = useState(() => {
-    const L = cfg.length * 0.3048
+  // Radio de la esfera que contiene la pérgola, para encuadrarla sin recortes.
+  const encuadre = useMemo(() => {
+    const L = (cfg.length + cfg.sideOH * 2) * 0.3048
+    const P = (cfg.projection + cfg.frontOH) * 0.3048
     const H = cfg.height * 0.3048
-    return { radio: Math.max(10, L * 1.9), centroY: H * 0.52, sombra: Math.max(9, L * 1.6) }
-  })
+    const radioObjeto = 0.5 * Math.sqrt(L * L + P * P + H * H)
+    return { radioObjeto, centroY: H * 0.5, sombra: Math.max(6, radioObjeto * 1.7) }
+  }, [cfg.length, cfg.projection, cfg.height, cfg.sideOH, cfg.frontOH])
 
   return (
     <div className="flex min-h-[100dvh] flex-col bg-[#0B0F14] lg:h-[100dvh] lg:flex-row lg:overflow-hidden">

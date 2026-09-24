@@ -130,19 +130,11 @@ export function TuuciModel({ cfg }: { cfg: ConfigTuuci }) {
           <meshStandardMaterial color={wood} roughness={0.5} metalness={0.15} />
         </mesh>
         {g.esMax && (
-          // Cables tensores del sistema Solanox
-          <>
-            {postPos.map(([x, z], i) => (
-              <mesh
-                key={`t-${i}`}
-                position={[x * 0.55, -0.32, z * 0.55]}
-                rotation={[Math.atan2(z, 0) * 0.15, Math.atan2(z, x), 0.5]}
-              >
-                <cylinderGeometry args={[0.008, 0.008, g.S * 0.55, 6]} />
-                <meshStandardMaterial color="#C9CDD2" metalness={0.9} roughness={0.25} />
-              </mesh>
-            ))}
-          </>
+          // Refuerzo perimetral del sistema Solanox
+          <mesh position={[0, -0.1, 0]}>
+            <boxGeometry args={[g.canopySide + 0.04, 0.05, g.canopySide + 0.04]} />
+            <meshStandardMaterial color="#C9CDD2" metalness={0.85} roughness={0.28} />
+          </mesh>
         )}
       </group>
 
@@ -150,25 +142,25 @@ export function TuuciModel({ cfg }: { cfg: ConfigTuuci }) {
       {g.esLulu && (
         <group>
           {/* base */}
-          <mesh position={[0, 0.22, 0]} castShadow receiveShadow>
-            <boxGeometry args={[g.S - 0.12, 0.34, g.S - 0.46]} />
+          <mesh position={[0, 0.19, 0]} castShadow receiveShadow>
+            <boxGeometry args={[g.S - 0.42, 0.28, g.S - 0.62]} />
             <meshStandardMaterial color={wood} roughness={0.74} metalness={0.02} />
           </mesh>
           {/* listones frontales */}
           {[0, 1, 2].map((i) => (
-            <mesh key={i} position={[0, 0.12 + i * 0.1, (g.S - 0.46) / 2 + 0.005]}>
-              <boxGeometry args={[g.S - 0.16, 0.055, 0.02]} />
+            <mesh key={i} position={[0, 0.1 + i * 0.075, (g.S - 0.62) / 2 + 0.008]}>
+              <boxGeometry args={[g.S - 0.46, 0.045, 0.02]} />
               <meshStandardMaterial color={wood} roughness={0.62} metalness={0.02} />
             </mesh>
           ))}
           {cfg.cushions && (
             <>
-              <mesh position={[0, 0.48, 0.03]} castShadow>
-                <boxGeometry args={[g.S - 0.2, 0.2, g.S - 0.6]} />
+              <mesh position={[0, 0.41, 0.03]} castShadow>
+                <boxGeometry args={[g.S - 0.5, 0.18, g.S - 0.7]} />
                 <meshStandardMaterial color="#EDEBE4" roughness={0.95} metalness={0} />
               </mesh>
-              <mesh position={[0, 0.72, -(g.S - 0.6) / 2 + 0.16]} castShadow>
-                <boxGeometry args={[g.S - 0.5, 0.3, 0.26]} />
+              <mesh position={[0, 0.63, -(g.S - 0.7) / 2 + 0.16]} castShadow>
+                <boxGeometry args={[g.S - 0.66, 0.28, 0.24]} />
                 <meshStandardMaterial color="#E4E1D8" roughness={0.95} metalness={0} />
               </mesh>
             </>
@@ -186,9 +178,9 @@ export function TuuciModel({ cfg }: { cfg: ConfigTuuci }) {
           ].map((c, i) => (
             <group key={i} position={c.pos as [number, number, number]} rotation={c.rot as [number, number, number]}>
               {[-1, 1].map((s) => (
-                <mesh key={s} position={[s * (g.S / 2 - g.S * 0.13), 0, 0]} castShadow>
-                  <boxGeometry args={[g.S * 0.26, g.H - 0.22, 0.035]} />
-                  <meshStandardMaterial color="#F6F4EF" roughness={0.96} metalness={0} transparent opacity={0.94} />
+                <mesh key={s} position={[s * (g.S / 2 - g.S * 0.11), 0, 0]} castShadow>
+                  <boxGeometry args={[g.S * 0.2, g.H - 0.24, 0.03]} />
+                  <meshStandardMaterial color="#F7F5F1" roughness={0.96} metalness={0} transparent opacity={0.8} />
                 </mesh>
               ))}
             </group>

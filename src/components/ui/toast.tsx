@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { CheckCircle2, Info, TriangleAlert, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useT } from '@/lib/i18n'
 
 type ToastKind = 'success' | 'info' | 'warn'
 export interface ToastItem {
@@ -17,6 +18,7 @@ const ToastCtx = createContext<Ctx | null>(null)
 let seq = 0
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
+  const { t } = useT()
   const [items, setItems] = useState<ToastItem[]>([])
 
   const dismiss = useCallback((id: number) => {
@@ -71,7 +73,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               <button
                 onClick={() => dismiss(i.id)}
                 className="shrink-0 rounded-md p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                aria-label="Cerrar"
+                aria-label={t('misc.close')}
               >
                 <X className="h-3.5 w-3.5" />
               </button>

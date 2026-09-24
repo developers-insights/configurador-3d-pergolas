@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useEffect } from 'react'
 import { cn } from '@/lib/utils'
+import { useT } from '@/lib/i18n'
 
 interface Props {
   open: boolean
@@ -14,6 +15,7 @@ interface Props {
 
 /** Modal simple con backdrop, cierre por Escape y bloqueo de scroll. */
 export function Modal({ open, onClose, title, subtitle, children, className }: Props) {
+  const { t } = useT()
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
@@ -58,7 +60,7 @@ export function Modal({ open, onClose, title, subtitle, children, className }: P
                 <button
                   onClick={onClose}
                   className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                  aria-label="Cerrar"
+                  aria-label={t('misc.close')}
                 >
                   <X className="h-4 w-4" />
                 </button>

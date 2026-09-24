@@ -57,8 +57,13 @@ Cadena: **Proveedor (ultra admin) → Empresas de pérgolas (usuarios) → Clien
 - **Empresas**: tabla con estado, plan, último acceso y cantidad de pedidos, buscador y filtros activo/inactivo; click abre el detalle con contacto, región y últimos pedidos.
 - **Pedidos**: lista con empresa, cliente final, configuración, fecha, total y estado; los creados en la demo aparecen primero, resaltados con "Creado en esta sesión". El detalle muestra el despiece completo y permite cambiar el estado con toast.
 
-## 🔜 Pendiente
-- Bloque 8 — DevNotices, QA de i18n, mobile 375px y performance del canvas.
+### Bloque 8 — QA final
+- **Auto-fit de cámara**: el encuadre se calcula desde el radio real del modelo y el aspect del visor, así la pérgola entra completa tanto en desktop como en 375px, y "Reiniciar vista" vuelve a ese encuadre.
+- Mobile 375px verificado en login, selección, ambos configuradores, despiece y las tres vistas de admin: sin scroll horizontal (`scrollWidth === 375`).
+- i18n ES/EN completo, incluidos los `aria-label` de toasts y modales.
+- DevNotices ámbar en PDF, catálogo de materiales, base de datos de pedidos + notificaciones, alta/baja de empresas y modelos 3D.
+- Perf del canvas: dpr tope 1.5 en pantallas chicas y 1.8 en desktop; el `<Canvas>` se monta una sola vez por configurador.
+- Flujo end-to-end probado sobre la build de producción servida con `npx serve -s dist`, con deep links OK en las 6 rutas.
 
 ## 🧭 Decisiones
 - **shadcn/ui a mano**: se escribieron las primitivas con la misma API (cva + cn) en lugar de correr el CLI, para no arrastrar Radix completo en una demo estática.

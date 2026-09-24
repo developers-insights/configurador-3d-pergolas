@@ -73,7 +73,12 @@ export default function AdminLayout() {
           <LogOut className="h-3.5 w-3.5" />
           {t('nav.logout')}
         </button>
-        <PoweredBy className="px-3 pb-1" />
+        <div className="flex items-center justify-between px-3 pb-1">
+          <PoweredBy />
+          <span className="rounded border border-border px-1.5 py-px text-[9px] font-bold uppercase tracking-wider text-muted-foreground/70">
+            {t('app.demoPreview')}
+          </span>
+        </div>
       </div>
     </div>
   )

@@ -46,10 +46,12 @@ export default function TuuciConfigurator() {
   const [panelAbierto, setPanelAbierto] = useState(false)
 
   const total = useMemo(() => totalDespiece(calcularDespiece(cfg)), [cfg])
-  const [encuadre] = useState(() => {
+  const encuadre = useMemo(() => {
     const S = cfg.size * 0.3048
-    return { radio: Math.max(8, S * 2.6), centroY: 1.35, sombra: Math.max(7, S * 2) }
-  })
+    const H = cfg.sub === 'lulu' ? 2.9 : cfg.sub === 'maxSolanox' ? 3.3 : 3.1
+    const radioObjeto = 0.5 * Math.sqrt(S * S * 2 + H * H) * 1.08
+    return { radioObjeto, centroY: H * 0.46, sombra: Math.max(5, radioObjeto * 1.7) }
+  }, [cfg.size, cfg.sub])
 
   const [min, max] = RANGO[cfg.sub]
   const indice = SUBMODELOS.findIndex((s) => s.id === cfg.sub)
