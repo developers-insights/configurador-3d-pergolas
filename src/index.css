@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 98%;
+    --foreground: 220 25% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+    --primary: 220 25% 12%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 94%;
+    --secondary-foreground: 220 25% 12%;
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 220 15% 94%;
+    --accent-foreground: 220 25% 12%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 205 100% 56%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 220 26% 7%;
+    --foreground: 210 20% 96%;
+    --card: 220 24% 10%;
+    --card-foreground: 210 20% 96%;
+    --popover: 220 24% 10%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 210 20% 96%;
+    --primary-foreground: 220 26% 8%;
+    --secondary: 220 18% 16%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 220 18% 15%;
+    --muted-foreground: 215 15% 62%;
+    --accent: 220 18% 16%;
+    --accent-foreground: 210 20% 96%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 16% 20%;
+    --input: 220 16% 20%;
+    --ring: 205 100% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    overscroll-behavior-y: none;
+  }
+  ::selection {
+    @apply bg-[#1FA2FF]/25;
+  }
+}
+
+@layer utilities {
+  .num {
+    @apply font-mono tabular-nums;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .glass {
+    backdrop-filter: blur(12px) saturate(140%);
+  }
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* El canvas 3D nunca debe capturar el scroll de la página en mobile */
+canvas {
+  touch-action: none;
+  outline: none;
+}
+
+/* ── Slider (input[type=range]) ───────────────────────────────────────────── */
+.ins-range {
+  --pct: 50%;
+  --tone: #1fa2ff;
+}
+.ins-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--tone) 0%,
+    var(--tone) var(--pct),
+    currentColor var(--pct),
+    currentColor 100%
+  );
+  opacity: 1;
+}
+.ins-range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.18;
+}
+.ins-range::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--tone);
+}
+.ins-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -7px;
+  height: 18px;
+  width: 18px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid var(--tone);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+}
+.ins-range::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+}
+.ins-range::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid var(--tone);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.ins-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--tone);
+  outline-offset: 2px;
+}
+/* El track inactivo toma el color de texto con baja opacidad */
+.ins-range {
+  color: rgba(127, 127, 127, 0.28);
+}
