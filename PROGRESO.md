@@ -38,8 +38,13 @@ Cadena: **Proveedor (ultra admin) → Empresas de pérgolas (usuarios) → Clien
 - Resumen con toda la configuración, chips de extras y estimado de referencia calculado con `calcularDespiece`.
 - Estado persistido en `sessionStorage` (`useConfig`), botón de reiniciar configuración con toast.
 
+### Bloque 5 — Configurador Tuuci
+- Estética clara / lujo resort: visor sobre blanco, panel derecho blanco con acento negro carbón y wordmark TUUCI centrado sobre el visor.
+- Colección en tarjetas (MAX Solanox Pergola · Pérgola · Lulu Day Lounge) con garantía, rango de medidas y acabados, más flechas de navegación tipo la referencia.
+- Opciones: tamaño por sub-modelo (la Lulu es de medida única), 6 swatches de madera, 4 colores de lona (el rayado con textura generada) y extras de cortinas y cojines. Todo repinta el 3D en vivo.
+- Los paneles de cada configurador fuerzan su propia identidad de color, así el tema global no les pisa el contraste.
+
 ## 🔜 Pendiente
-- Bloque 5 — Configurador Tuuci.
 - Bloque 6 — Despiece + formulario de pedido + WhatsApp.
 - Bloque 7 — Panel Admin.
 - Bloque 8 — DevNotices, QA de i18n, mobile 375px y performance del canvas.

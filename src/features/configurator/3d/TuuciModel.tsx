@@ -27,7 +27,7 @@ function useStripeTexture(active: boolean) {
 
 /** Volado ondulado del borde de la lona (el "festón" de la referencia). */
 function Valance({ side, y, color, map }: { side: number; y: number; color: string; map: THREE.Texture | null }) {
-  const perLado = Math.max(5, Math.round(side / 0.26))
+  const perLado = Math.max(6, Math.round(side / 0.21))
   const step = side / perLado
   const half = side / 2
 
@@ -40,8 +40,8 @@ function Valance({ side, y, color, map }: { side: number; y: number; color: stri
   return (
     <group>
       {bolas.map((p, i) => (
-        <mesh key={i} position={p} scale={[1, 0.85, 1]}>
-          <sphereGeometry args={[step * 0.56, 12, 10]} />
+        <mesh key={i} position={p} scale={[1, 0.6, 1]}>
+          <sphereGeometry args={[step * 0.62, 12, 10]} />
           <meshStandardMaterial color={color} map={map ?? undefined} roughness={0.92} metalness={0} />
         </mesh>
       ))}
