@@ -1,7 +1,16 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import type { Pedido, Rol, Sesion } from '@/types'
+import type { ModuloPropuesta } from '@/features/propuesta/modulos'
 import { KEYS, ls, readJSON, removeKey, ss, writeJSON } from './storage'
 import { PEDIDOS_MOCK } from '@/data/mock'
+
+/** Contexto de una previsualización abierta desde la propuesta. */
+export interface Preview {
+  modulo: number
+  view: string
+  rolPrevio: Rol
+  titulo: string
+}
 
 interface Ctx {
   sesion: Sesion | null
@@ -12,6 +21,13 @@ interface Ctx {
   pedidos: Pedido[]
   addPedido: (p: Pedido) => void
   setEstadoPedido: (id: string, estado: Pedido['estado']) => void
+  /** Previsualización en curso lanzada desde la propuesta, o null. */
+  preview: Preview | null
+  abrirPreview: (m: ModuloPropuesta, titulo: string) => void
+  cerrarPreview: () => void
+  /** Módulo al que hay que volver y resaltar al cerrar la previsualización. */
+  moduloDestacado: number | null
+  limpiarDestacado: () => void
 }
 
 const SessionCtx = createContext<Ctx | null>(null)
@@ -71,6 +87,46 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   const addPedido = useCallback((p: Pedido) => setNuevos((prev) => [p, ...prev]), [])
 
+  /* ── Previsualización de módulos desde la propuesta ───────────────────── */
+  const [preview, setPreview] = useState<Preview | null>(null)
+  const [moduloDestacado, setModuloDestacado] = useState<number | null>(null)
+
+  const abrirPreview = useCallback((m: ModuloPropuesta, titulo: string) => {
+    setSesion((prev) => {
+      if (!prev) return prev
+      setPreview({ modulo: m.n, view: m.ruta, rolPrevio: prev.rol, titulo })
+      // Los módulos del proveedor viven en el rol Admin: cambiamos solos.
+      if (prev.rol === m.rol) return prev
+      return {
+        ...prev,
+        rol: m.rol,
+        usuario: m.rol === 'admin' ? 'admin' : 'empresa',
+        empresa: m.rol === 'admin' ? CREDENCIALES.admin.empresa : CREDENCIALES.empresa.empresa,
+      }
+    })
+  }, [])
+
+  const cerrarPreview = useCallback(() => {
+    setPreview((p) => {
+      if (!p) return null
+      setModuloDestacado(p.modulo)
+      setSesion((prev) =>
+        prev && prev.rol !== p.rolPrevio
+          ? {
+              ...prev,
+              rol: p.rolPrevio,
+              usuario: p.rolPrevio === 'admin' ? 'admin' : 'empresa',
+              empresa:
+                p.rolPrevio === 'admin' ? CREDENCIALES.admin.empresa : CREDENCIALES.empresa.empresa,
+            }
+          : prev,
+      )
+      return null
+    })
+  }, [])
+
+  const limpiarDestacado = useCallback(() => setModuloDestacado(null), [])
+
   const setEstadoPedido = useCallback((id: string, estado: Pedido['estado']) => {
     setNuevos((prev) => prev.map((p) => (p.id === id ? { ...p, estado } : p)))
     setEstados((prev) => ({ ...prev, [id]: estado }))
@@ -82,8 +138,34 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   }, [nuevos, estados])
 
   const value = useMemo<Ctx>(
-    () => ({ sesion, login, logout, switchRol, pedidos, addPedido, setEstadoPedido }),
-    [sesion, login, logout, switchRol, pedidos, addPedido, setEstadoPedido],
+    () => ({
+      sesion,
+      login,
+      logout,
+      switchRol,
+      pedidos,
+      addPedido,
+      setEstadoPedido,
+      preview,
+      abrirPreview,
+      cerrarPreview,
+      moduloDestacado,
+      limpiarDestacado,
+    }),
+    [
+      sesion,
+      login,
+      logout,
+      switchRol,
+      pedidos,
+      addPedido,
+      setEstadoPedido,
+      preview,
+      abrirPreview,
+      cerrarPreview,
+      moduloDestacado,
+      limpiarDestacado,
+    ],
   )
 
   return <SessionCtx.Provider value={value}>{children}</SessionCtx.Provider>

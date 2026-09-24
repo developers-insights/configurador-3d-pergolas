@@ -404,6 +404,149 @@ export const DICT: Record<string, [string, string]> = {
     'Realistic AI image · feature in development — In the demo the image is a sample; once developed, a truly photorealistic image is generated from the photo of the client\u2019s patio and the chosen configuration.',
   ],
 
+  // ── Propuesta comercial ──────────────────────────────────────────────────
+  'prop.badge': ['Propuesta comercial', 'Commercial proposal'],
+  'prop.title': ['Propuesta para {nombre}', 'Proposal for {nombre}'],
+  'prop.subtitle': [
+    'Plataforma de configuración 3D de pérgolas con despiece automático de materiales y pedidos centralizados.',
+    '3D pergola configuration platform with automatic bill of materials and centralized orders.',
+  ],
+  'prop.print': ['Imprimir', 'Print'],
+  'prop.whatsapp': ['Avanzar por WhatsApp', 'Move forward on WhatsApp'],
+
+  // Circuito
+  'prop.flowTitle': ['El circuito', 'How it works'],
+  'prop.step': ['Paso', 'Step'],
+  'prop.step1': [
+    'La empresa de pérgolas entra a su cuenta segura y elige el modelo (Solstice o Tuuci).',
+    'The pergola company signs in to its secure account and picks the model (Solstice or Tuuci).',
+  ],
+  'prop.step2': [
+    'Configura la pérgola en 3D con el cliente delante: medidas, techo, paredes, add-ons, y la gira en vivo.',
+    'Configures the pergola in 3D with the client right there: sizes, roof, walls, add-ons, and rotates it live.',
+  ],
+  'prop.step3': [
+    'Genera la imagen realista para que el cliente vea cómo quedaría en su casa y se decida.',
+    'Generates the realistic image so the client sees how it would look at home and makes up their mind.',
+  ],
+  'prop.step4': [
+    'Al confirmar, el sistema arma el despiece: el listado exacto de cada material a comprar.',
+    'On confirmation, the system builds the BOM: the exact list of every material to buy.',
+  ],
+  'prop.step5': [
+    'Envía el pedido y te llega a tu panel, con la empresa y el cliente final identificados.',
+    'Sends the order and it reaches your panel, with the company and the end client identified.',
+  ],
+  'prop.flowFoot': [
+    'Y cada pedido queda registrado y listo para que lo prepares y despaches.',
+    'And every order stays on record, ready for you to prepare and ship.',
+  ],
+
+  // Módulos
+  'prop.modulesTitle': ['Qué incluye la plataforma', 'What the platform includes'],
+  'prop.modulesCount': ['{n} módulos', '{n} modules'],
+  'prop.seeDemo': ['Ver en el demo', 'See it in the demo'],
+
+  'prop.m1.name': ['Renderizador 3D estilo Solstice', 'Solstice-style 3D renderer'],
+  'prop.m1.desc': [
+    'Configurador de pérgola de aluminio moderna, se gira en vivo.',
+    'Modern aluminum pergola configurator, rotates live.',
+  ],
+  'prop.m1.b1': ['Dimensiones, postes y paredes', 'Dimensions, posts and walls'],
+  'prop.m1.b2': ['Techo de lamas o panel', 'Louvered or panel roof'],
+  'prop.m1.b3': ['Add-ons (LED, ventilador)', 'Add-ons (LED, fan)'],
+  'prop.m1.b4': ['Acabados de color', 'Color finishes'],
+
+  'prop.m2.name': ['Renderizador 3D estilo Tuuci', 'Tuuci-style 3D renderer'],
+  'prop.m2.desc': [
+    'Configurador de pérgola/cabana premium de madera.',
+    'Premium wooden pergola/cabana configurator.',
+  ],
+  'prop.m2.b1': ['Varios sub-modelos', 'Several sub-models'],
+  'prop.m2.b2': ['Acabados de madera', 'Wood finishes'],
+  'prop.m2.b3': ['Lona/canopy de color', 'Colored fabric canopy'],
+  'prop.m2.b4': ['Look resort', 'Resort look'],
+
+  'prop.m3.name': ['Despiece automático de materiales', 'Automatic bill of materials'],
+  'prop.m3.desc': [
+    'Al terminar, el listado completo de cada pieza.',
+    'When finished, the complete list of every piece.',
+  ],
+  'prop.m3.b1': ['Código y cantidad por material', 'Code and quantity per material'],
+  'prop.m3.b2': ['Calculado desde la configuración', 'Calculated from the configuration'],
+  'prop.m3.b3': ['Exportable', 'Exportable'],
+  'prop.m3.b4': ['Base para el pedido', 'Basis for the order'],
+
+  'prop.m4.name': ['Imagen realista con IA', 'Realistic AI image'],
+  'prop.m4.desc': [
+    'Foto realista de cómo quedaría instalada.',
+    'Realistic photo of how it would look installed.',
+  ],
+  'prop.m4.b1': ['A partir de la config elegida', 'From the chosen configuration'],
+  'prop.m4.b2': ['Variantes de iluminación', 'Lighting variants'],
+  'prop.m4.b3': ['Lista para mostrarle al cliente', 'Ready to show the client'],
+  'prop.m4.b4': ['Descargable', 'Downloadable'],
+
+  'prop.m5.name': ['Pedido de materiales centralizado', 'Centralized materials order'],
+  'prop.m5.desc': [
+    'Envía el despiece como pedido al proveedor.',
+    'Sends the BOM to the supplier as an order.',
+  ],
+  'prop.m5.b1': ['Formulario con empresa y cliente final', 'Form with company and end client'],
+  'prop.m5.b2': ['Opción WhatsApp', 'WhatsApp option'],
+  'prop.m5.b3': ['Queda registrado', 'Stays on record'],
+  'prop.m5.b4': ['Notificación al proveedor', 'Supplier notification'],
+
+  'prop.m6.name': ['Panel de administración del proveedor', 'Supplier admin panel'],
+  'prop.m6.desc': ['Control total de la operación.', 'Full control of the operation.'],
+  'prop.m6.b1': ['Empresas activas e inactivas', 'Active and inactive companies'],
+  'prop.m6.b2': ['Pedidos entrantes con detalle', 'Incoming orders with detail'],
+  'prop.m6.b3': ['Estados del pedido', 'Order statuses'],
+  'prop.m6.b4': ['Métricas', 'Metrics'],
+
+  'prop.m7.name': ['Seguridad y accesos multi-usuario', 'Security and multi-user access'],
+  'prop.m7.desc': [
+    'Cada empresa cliente con su cuenta y acceso seguro.',
+    'Each client company with its own account and secure access.',
+  ],
+  'prop.m7.b1': ['Cuentas por empresa', 'Accounts per company'],
+  'prop.m7.b2': ['Permisos por rol', 'Role-based permissions'],
+  'prop.m7.b3': ['Acceso seguro a la base de datos de pedidos', 'Secure access to the orders database'],
+  'prop.m7.b4': [
+    'El proveedor ve todo desde el panel central',
+    'The supplier sees everything from the central panel',
+  ],
+
+  // Inversión
+  'prop.investTitle': ['Inversión', 'Investment'],
+  'prop.investShow': ['Ver inversión', 'View investment'],
+  'prop.investHide': ['Ocultar inversión', 'Hide investment'],
+  'prop.investTotal': ['Inversión total', 'Total investment'],
+  'prop.delivery': ['Entrega', 'Delivery'],
+  'prop.deliveryValue': ['2 meses', '2 months'],
+  'prop.includes': ['Incluye', 'Includes'],
+  'prop.includesValue': [
+    'Plataforma completa — Renderizador 3D Solstice + Tuuci, despiece automático, imagen realista con IA, pedidos centralizados, panel de administración, y seguridad/accesos multi-usuario.',
+    'Complete platform — Solstice + Tuuci 3D renderer, automatic BOM, realistic AI image, centralized orders, admin panel, and security/multi-user access.',
+  ],
+  'prop.payment': ['Condiciones de pago', 'Payment terms'],
+  'prop.paymentValue': ['50% al inicio / 50% a la entrega', '50% upfront / 50% on delivery'],
+  'prop.discount': [
+    'Pagando el 100% por adelantado: 15% de descuento',
+    'Paying 100% upfront: 15% discount',
+  ],
+
+  // Cierre
+  'prop.closeTitle': ['¿Arrancamos?', 'Shall we start?'],
+  'prop.closeDesc': [
+    'Escribinos y coordinamos el arranque esta misma semana.',
+    'Write to us and we can kick off this very week.',
+  ],
+
+  // Previsualización con retorno
+  'prop.backToProposal': ['Volver a la propuesta', 'Back to the proposal'],
+  'prop.watching': ['Estás viendo:', 'You are viewing:'],
+
   // ── Varios ───────────────────────────────────────────────────────────────
   'misc.soon': ['Disponible al desarrollar', 'Available once developed'],
   'misc.close': ['Cerrar', 'Close'],
