@@ -1,15 +1,25 @@
 import { Suspense, useCallback, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls } from '@react-three/drei'
+import { GroundShadow } from './GroundShadow'
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { Maximize2, RotateCw } from 'lucide-react'
 import { useT } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
+export interface Encuadre {
+  /** Distancia inicial de la cámara al centro del modelo. */
+  radio: number
+  /** Altura del punto al que mira la cámara. */
+  centroY: number
+  /** Tamaño del plano de sombra de contacto. */
+  sombra: number
+}
+
 interface Props {
   children: React.ReactNode
-  /** Radio inicial de cámara: se calcula desde el tamaño del modelo. */
-  camera?: [number, number, number]
+  /** Encuadre inicial, calculado una sola vez desde el tamaño del modelo. */
+  encuadre: Encuadre
   background?: string
   tone?: 'light' | 'dark'
   /** Intensidad y preset del Environment. */
@@ -26,16 +36,23 @@ interface Props {
  */
 export function Viewer({
   children,
-  camera = [9, 6, 12],
+  encuadre,
   background,
   tone = 'light',
   preset = 'city',
-  shadowOpacity = 0.42,
+  shadowOpacity = 0.72,
   className,
 }: Props) {
   const { t } = useT()
   const controls = useRef<OrbitControlsImpl | null>(null)
   const [auto, setAuto] = useState(false)
+  // El encuadre se congela al montar: después la cámara es del usuario.
+  const inicial = useRef(encuadre).current
+  const posCam: [number, number, number] = [
+    inicial.radio * 0.62,
+    inicial.centroY + inicial.radio * 0.42,
+    inicial.radio * 0.86,
+  ]
 
   const reset = useCallback(() => {
     controls.current?.reset()
@@ -53,50 +70,51 @@ export function Viewer({
       <Canvas
         shadows
         dpr={[1, 1.8]}
-        gl={{ antialias: true, powerPreference: 'high-performance' }}
-        camera={{ position: camera, fov: 38, near: 0.1, far: 220 }}
+        gl={{ antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: true }}
+        camera={{ position: posCam, fov: 38, near: 0.1, far: 260 }}
         style={{ background: 'transparent' }}
       >
-        <Suspense fallback={null}>
+        <>
           <hemisphereLight intensity={tone === 'dark' ? 0.55 : 0.85} groundColor="#b9b3a8" />
           <directionalLight
-            position={[14, 20, 10]}
-            intensity={tone === 'dark' ? 1.5 : 1.9}
+            position={[inicial.radio * 0.5, inicial.radio * 1.7, inicial.radio * 0.4]}
+            intensity={tone === 'dark' ? 1.45 : 1.75}
             castShadow
-            shadow-mapSize={[1024, 1024]}
-            shadow-camera-left={-30}
-            shadow-camera-right={30}
-            shadow-camera-top={30}
-            shadow-camera-bottom={-30}
+            shadow-mapSize={[2048, 2048]}
+            shadow-bias={-0.0006}
+            shadow-normalBias={0.02}
+            shadow-camera-near={0.5}
+            shadow-camera-far={inicial.radio * 4}
+            shadow-camera-left={-inicial.sombra}
+            shadow-camera-right={inicial.sombra}
+            shadow-camera-top={inicial.sombra}
+            shadow-camera-bottom={-inicial.sombra}
           />
           <directionalLight position={[-12, 10, -8]} intensity={0.45} />
 
           {children}
 
-          <ContactShadows
-            position={[0, 0.001, 0]}
-            opacity={shadowOpacity}
-            scale={46}
-            blur={2.4}
-            far={22}
-            resolution={512}
-            color="#1c1c1c"
-          />
-          <Environment preset={preset} />
+          <GroundShadow size={inicial.sombra} opacity={shadowOpacity} />
+          {/* El HDR del Environment se descarga aparte: si tarda o falla,
+              la escena ya se ve con las luces analíticas de arriba. */}
+          <Suspense fallback={null}>
+            <Environment preset={preset} />
+          </Suspense>
           <OrbitControls
             ref={controls}
             makeDefault
+            target={[0, inicial.centroY, 0]}
             enablePan={false}
             enableDamping
             dampingFactor={0.06}
             autoRotate={auto}
             autoRotateSpeed={0.9}
-            minDistance={6}
-            maxDistance={60}
+            minDistance={inicial.radio * 0.4}
+            maxDistance={inicial.radio * 3.2}
             minPolarAngle={0.16}
             maxPolarAngle={Math.PI / 2.12}
           />
-        </Suspense>
+        </>
       </Canvas>
 
       {/* Controles del visor */}
