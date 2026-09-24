@@ -44,8 +44,14 @@ Cadena: **Proveedor (ultra admin) → Empresas de pérgolas (usuarios) → Clien
 - Opciones: tamaño por sub-modelo (la Lulu es de medida única), 6 swatches de madera, 4 colores de lona (el rayado con textura generada) y extras de cortinas y cojines. Todo repinta el 3D en vivo.
 - Los paneles de cada configurador fuerzan su propia identidad de color, así el tema global no les pisa el contraste.
 
+### Bloque 6 — Despiece y pedido
+- Encabezado con **thumbnail real del 3D** (se captura del canvas al salir del configurador y se guarda en `sessionStorage`), resumen de la configuración, cantidad de ítems, piezas y total de referencia.
+- Tabla de materiales agrupada por Estructura · Techo · Cerramientos · Extras y eléctrico · Herrajes · Textil, con SKU, descripción, cantidad, unidad, precio de referencia y subtotal. Todo derivado de la config (postes = columnas elegidas, lamas = f(largo), LED = perímetro, paños = f(lados y altura)…).
+- Formulario de pedido en modal: datos de la empresa + datos del cliente final + listado de materiales adjunto en solo lectura, con validación de campos obligatorios.
+- Al enviar: toast, pantalla de confirmación con el número de pedido y atajo que cambia a rol Admin y abre el pedido recién creado.
+- Botón de WhatsApp con el resumen prellenado y botón de PDF que muestra su DevNotice.
+
 ## 🔜 Pendiente
-- Bloque 6 — Despiece + formulario de pedido + WhatsApp.
 - Bloque 7 — Panel Admin.
 - Bloque 8 — DevNotices, QA de i18n, mobile 375px y performance del canvas.
 

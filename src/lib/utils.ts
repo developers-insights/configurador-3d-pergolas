@@ -30,3 +30,8 @@ export function fmtDate(iso: string, lang: 'es' | 'en' = 'es') {
 export function uid(prefix = 'id') {
   return `${prefix}-${Math.random().toString(36).slice(2, 8)}${Date.now().toString(36).slice(-4)}`
 }
+
+/** Correlativo corto con el mismo formato que los pedidos históricos: PED-2610. */
+export function nuevoIdPedido(existentes: number) {
+  return `PED-${2610 + existentes}`
+}

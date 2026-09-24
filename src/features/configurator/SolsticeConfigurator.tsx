@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom'
 import { Viewer } from './3d/Viewer'
 import { SolsticeModel } from './3d/SolsticeModel'
 import { FieldLabel, OptionGrid, SectionTitle, SwatchRow, ToggleRow } from './Controls3d'
+import { capturarThumbnail } from '@/features/despiece/thumbnail'
 import { KEY_SOLSTICE, useConfig } from './useConfig'
 import { Slider } from '@/components/ui/slider'
 import { RoleSwitcher } from '@/components/shell/RoleSwitcher'
@@ -324,7 +325,10 @@ export default function SolsticeConfigurator() {
             <span className="num text-sm font-semibold text-white">{money(total)}</span>
           </div>
           <button
-            onClick={() => nav('/despiece?m=solstice')}
+            onClick={() => {
+                capturarThumbnail()
+                nav('/despiece?m=solstice')
+              }}
             className="no-tap-highlight flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#1FA2FF] text-sm font-semibold text-white shadow-[0_10px_30px_-12px_rgba(31,162,255,0.9)] transition-all hover:bg-[#0B84D8] active:scale-[0.99]"
           >
             {t('cfg.seeBom')}

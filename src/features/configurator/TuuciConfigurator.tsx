@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Viewer } from './3d/Viewer'
 import { TuuciModel } from './3d/TuuciModel'
 import { FieldLabel, SwatchRow, ToggleRow } from './Controls3d'
+import { capturarThumbnail } from '@/features/despiece/thumbnail'
 import { KEY_TUUCI, useConfig } from './useConfig'
 import { Slider } from '@/components/ui/slider'
 import { RoleSwitcher } from '@/components/shell/RoleSwitcher'
@@ -258,7 +259,10 @@ export default function TuuciConfigurator() {
               {t('cfg.changeModel')}
             </button>
             <button
-              onClick={() => nav('/despiece?m=tuuci')}
+              onClick={() => {
+                capturarThumbnail()
+                nav('/despiece?m=tuuci')
+              }}
               className="no-tap-highlight flex h-12 flex-[1.4] items-center justify-center gap-2 rounded-xl bg-neutral-900 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-neutral-700"
             >
               {t('cfg.seeBom')}
