@@ -270,3 +270,13 @@ canvas {
     break-inside: avoid;
   }
 }
+
+/* Mientras hay una previsualización abierta desde la propuesta, el contenido
+   se corre para que la barra de retorno no tape el título de la vista. */
+.preview-activa main {
+  padding-top: 3.25rem;
+}
+.preview-activa .cfg-float-header {
+  /* El encabezado flotante del configurador arranca debajo de la barra. */
+  padding-top: 5.25rem;
+}

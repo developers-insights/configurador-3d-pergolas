@@ -70,9 +70,10 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback((s: Sesion) => setSesion(s), [])
   const logout = useCallback(() => setSesion(null), [])
-  const switchRol = useCallback(
-    (rol: Rol) =>
-      setSesion((prev) =>
+  const switchRol = useCallback((rol: Rol) => {
+    // Cambiar de rol a mano cancela cualquier previsualización en curso.
+    setPreview(null)
+    setSesion((prev) =>
         prev
           ? {
               ...prev,
@@ -81,9 +82,8 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
               empresa: rol === 'admin' ? CREDENCIALES.admin.empresa : CREDENCIALES.empresa.empresa,
             }
           : prev,
-      ),
-    [],
-  )
+    )
+  }, [])
 
   const addPedido = useCallback((p: Pedido) => setNuevos((prev) => [p, ...prev]), [])
 

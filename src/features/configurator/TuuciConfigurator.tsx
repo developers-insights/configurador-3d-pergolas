@@ -76,7 +76,7 @@ export default function TuuciConfigurator() {
           <TuuciModel cfg={cfg} />
         </Viewer>
 
-        <div className="pointer-events-none absolute left-0 right-0 top-0 flex items-start justify-between gap-3 p-3 sm:p-4">
+        <div className="cfg-float-header pointer-events-none absolute left-0 right-0 top-0 flex items-start justify-between gap-3 p-3 sm:p-4">
           <button
             onClick={() => nav('/configurador')}
             className="no-tap-highlight pointer-events-auto inline-flex h-9 items-center gap-1.5 rounded-lg border border-black/[0.06] bg-white/85 px-2.5 text-[11px] font-medium text-neutral-700 backdrop-blur-md transition-colors hover:bg-white"

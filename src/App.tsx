@@ -4,6 +4,7 @@ import Login from '@/features/auth/Login'
 import { useSession } from '@/lib/session'
 import { PageLoader } from '@/components/shell/PageLoader'
 import { WelcomeModal } from '@/features/propuesta/WelcomeModal'
+import { BarraPreview } from '@/features/propuesta/BarraPreview'
 import { NotFound } from '@/components/shell/NotFound'
 import type { Rol } from '@/types'
 
@@ -46,6 +47,7 @@ export default function App() {
   return (
     <>
       {sesion && <WelcomeModal />}
+      {sesion && <BarraPreview />}
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/login" element={sesion ? <Navigate to={ENTRADA} replace /> : <Login />} />

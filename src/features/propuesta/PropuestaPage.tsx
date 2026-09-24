@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { ArrowUpRight, Check, MessageCircle, Printer } from 'lucide-react'
 import { PropuestaShell } from './PropuestaShell'
 import { Inversion } from './Inversion'
@@ -15,6 +16,7 @@ const ACENTO = '#1FA2FF'
 export default function PropuestaPage() {
   const { t } = useT()
   const { abrirPreview, moduloDestacado, limpiarDestacado } = useSession()
+  const nav = useNavigate()
   // Cada tarjeta guarda su nodo para poder volver a ella desde una preview.
   const tarjetas = useRef<Record<number, HTMLDivElement | null>>({})
 
@@ -125,7 +127,12 @@ export default function PropuestaPage() {
               modulo={m}
               indice={i}
               destacado={moduloDestacado === m.n}
-              onVerDemo={() => abrirPreview(m, t(m.nombreKey))}
+              onVerDemo={() => {
+                // El cambio de rol y la navegación van en el mismo tick: para
+                // cuando el guard evalúa la ruta, el rol ya es el correcto.
+                abrirPreview(m, t(m.nombreKey))
+                nav(m.ruta)
+              }}
               refCb={(nodo) => {
                 tarjetas.current[m.n] = nodo
               }}
