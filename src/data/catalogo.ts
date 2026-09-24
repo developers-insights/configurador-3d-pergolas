@@ -80,8 +80,9 @@ function despieceSolstice(c: ConfigSolstice): ItemDespiece[] {
   const items: ItemDespiece[] = []
   const [fEs, fEn, fCode] = FINISH_LABEL[c.finish]
 
-  const largoTotal = c.length + c.frontOH
-  const projTotal = c.projection + c.sideOH
+  // El voladizo lateral se reparte a ambos lados del largo; el frontal sale al frente.
+  const largoTotal = c.length + c.sideOH * 2
+  const projTotal = c.projection + c.frontOH
   const perimetroM = r1((largoTotal * 2 + projTotal * 2) * FT_TO_M)
   const areaM2 = r1(largoTotal * projTotal * FT_TO_M * FT_TO_M)
 

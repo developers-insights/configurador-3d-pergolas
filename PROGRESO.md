@@ -26,8 +26,13 @@ Cadena: **Proveedor (ultra admin) → Empresas de pérgolas (usuarios) → Clien
 - Pantalla de selección de modelo con tarjetas ilustradas, comparador Solstice vs Tuuci y tabla de diferencias clave.
 - `TopBar` neutro con marca, role switcher, tema/idioma y logout.
 
+### Bloque 3 — Motor 3D
+- `Viewer`: un único `<Canvas>` por configurador (OrbitControls con damping, `Environment`, `ContactShadows`, dpr [1, 1.8]). Botones de reiniciar vista y rotación automática; hint de arrastrar/zoom.
+- `SolsticeModel`: geometría paramétrica completa — medidas y voladizos, 2/4/6 columnas (cuadrada, slim, redonda), anclaje a piso o pared, vigas perimetrales e intermedias, techo de lamas orientables / panel aislado / abierto, cerramientos de vidrio, persiana y panel ciego, tira LED emisiva, ventiladores animados, calefactores y sensor de lluvia.
+- `TuuciModel`: tres sub-modelos (MAX Solanox con cables tensores, Pérgola clásica y Lulu Day Lounge con cama), canopy piramidal con faldón ondulado, 6 acabados de madera, 4 colores de lona (el rayado usa una `CanvasTexture` generada), cortinas y cojines.
+- Ambos modelos leen sus medidas en pies y las convierten a metros, así el 3D y el despiece hablan de lo mismo.
+
 ## 🔜 Pendiente
-- Bloque 3 — Componente 3D paramétrico con OrbitControls, Environment y ContactShadows.
 - Bloque 4 — Configurador Solstice.
 - Bloque 5 — Configurador Tuuci.
 - Bloque 6 — Despiece + formulario de pedido + WhatsApp.
