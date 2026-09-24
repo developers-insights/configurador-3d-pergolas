@@ -19,8 +19,14 @@ Cadena: **Proveedor (ultra admin) → Empresas de pérgolas (usuarios) → Clien
 - Tipos TS del dominio y datos mock: 15 empresas, 20 pedidos históricos, 12 meses de serie, top materiales.
 - Catálogo de materiales + motor de cálculo del despiece para Solstice y Tuuci.
 
+### Bloque 2 — Login, shell y navegación
+- Login centrado con pills de auto-fill (`empresa / Pergola2026`, `admin / Admin2026`), toggles de tema e idioma y link de WhatsApp.
+- `SessionProvider`: login/logout, **role switcher en vivo** (sin logout, resetea a la vista default del rol) y registro de pedidos de la sesión.
+- Router con guards por rol y deep links: `/configurador`, `/configurador/solstice`, `/configurador/tuuci`, `/despiece`, `/admin`, `/admin/empresas`, `/admin/pedidos`, 404.
+- Pantalla de selección de modelo con tarjetas ilustradas, comparador Solstice vs Tuuci y tabla de diferencias clave.
+- `TopBar` neutro con marca, role switcher, tema/idioma y logout.
+
 ## 🔜 Pendiente
-- Bloque 2 — Login, shell, role switcher y navegación de las 3 secciones.
 - Bloque 3 — Componente 3D paramétrico con OrbitControls, Environment y ContactShadows.
 - Bloque 4 — Configurador Solstice.
 - Bloque 5 — Configurador Tuuci.
