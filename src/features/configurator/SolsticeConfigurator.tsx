@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom'
 import { Viewer } from './3d/Viewer'
 import { SolsticeModel } from './3d/SolsticeModel'
 import { FieldLabel, OptionGrid, SectionTitle, SwatchRow, ToggleRow } from './Controls3d'
+import { BotonImagenRealista } from '@/features/imagen/BotonImagenRealista'
 import { capturarThumbnail } from '@/features/despiece/thumbnail'
 import { KEY_SOLSTICE, useConfig } from './useConfig'
 import { Slider } from '@/components/ui/slider'
@@ -419,6 +420,8 @@ function Overview({ cfg, total }: { cfg: ConfigSolstice; total: number }) {
         <p className="text-[10px] uppercase tracking-wider text-white/35">{t('cfg.estimate')}</p>
         <p className="num mt-0.5 text-xl font-semibold text-white">{money(total)}</p>
       </div>
+
+      <BotonImagenRealista modelo="solstice" tone="dark" className="mt-3" />
     </>
   )
 }

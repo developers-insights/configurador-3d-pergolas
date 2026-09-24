@@ -10,6 +10,7 @@ import type { Rol } from '@/types'
 const ModelSelect = lazy(() => import('@/features/configurator/ModelSelect'))
 const SolsticeConfigurator = lazy(() => import('@/features/configurator/SolsticeConfigurator'))
 const TuuciConfigurator = lazy(() => import('@/features/configurator/TuuciConfigurator'))
+const ImagenRealista = lazy(() => import('@/features/imagen/ImagenRealistaPage'))
 const Despiece = lazy(() => import('@/features/despiece/DespiecePage'))
 const Propuesta = lazy(() => import('@/features/propuesta/PropuestaPage'))
 const AdminLayout = lazy(() => import('@/features/admin/AdminLayout'))
@@ -82,6 +83,14 @@ export default function App() {
           element={
             <Guard rol="config">
               <TuuciConfigurator />
+            </Guard>
+          }
+        />
+        <Route
+          path="/configurador/imagen-realista"
+          element={
+            <Guard rol="config">
+              <ImagenRealista />
             </Guard>
           }
         />

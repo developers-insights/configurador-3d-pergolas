@@ -374,6 +374,36 @@ export const DICT: Record<string, [string, string]> = {
   ],
   'welcome.cta': ['Ver la plataforma', 'See the platform'],
 
+  // ── Imagen realista con IA ───────────────────────────────────────────────
+  'ia.title': ['Imagen realista con IA', 'Realistic AI image'],
+  'ia.eyebrow': ['Vista previa para el cliente', 'Client preview'],
+  'ia.subtitle': [
+    'Así vería tu cliente la pérgola instalada en su casa, con la configuración que acaban de armar.',
+    'This is how your client would see the pergola installed at home, with the configuration you just built.',
+  ],
+  'ia.cta': ['Generar imagen realista', 'Generate realistic image'],
+  'ia.generating': ['Generando la imagen…', 'Generating the image…'],
+  'ia.regenerate': ['Generar otra variante', 'Generate another variant'],
+  'ia.light': ['Iluminación', 'Lighting'],
+  'ia.day': ['Día', 'Daylight'],
+  'ia.dusk': ['Atardecer', 'Dusk'],
+  'ia.night': ['Noche', 'Night'],
+  'ia.compare': ['Antes / Después', 'Before / After'],
+  'ia.before': ['Antes', 'Before'],
+  'ia.after': ['Después', 'After'],
+  'ia.dragHint': ['Arrastrá el control para comparar', 'Drag the handle to compare'],
+  'ia.download': ['Descargar imagen', 'Download image'],
+  'ia.backToConfig': ['Volver al configurador', 'Back to configurator'],
+  'ia.toBom': ['Ver despiece', 'View bill of materials'],
+  'ia.scene': ['Escena', 'Scene'],
+  'ia.scenePatio': ['Patio de casa', 'Home patio'],
+  'ia.scenePool': ['Borde de pileta', 'Poolside'],
+  'ia.sceneTerrace': ['Terraza urbana', 'Urban terrace'],
+  'dev.ia': [
+    'Imagen realista con IA · función en desarrollo — En la demo la imagen es de ejemplo; al desarrollar se genera una imagen fotorrealista real a partir de la foto del patio del cliente y la configuración elegida.',
+    'Realistic AI image · feature in development — In the demo the image is a sample; once developed, a truly photorealistic image is generated from the photo of the client\u2019s patio and the chosen configuration.',
+  ],
+
   // ── Varios ───────────────────────────────────────────────────────────────
   'misc.soon': ['Disponible al desarrollar', 'Available once developed'],
   'misc.close': ['Cerrar', 'Close'],

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Viewer } from './3d/Viewer'
 import { TuuciModel } from './3d/TuuciModel'
 import { FieldLabel, SwatchRow, ToggleRow } from './Controls3d'
+import { BotonImagenRealista } from '@/features/imagen/BotonImagenRealista'
 import { capturarThumbnail } from '@/features/despiece/thumbnail'
 import { KEY_TUUCI, useConfig } from './useConfig'
 import { Slider } from '@/components/ui/slider'
@@ -231,7 +232,9 @@ export default function TuuciConfigurator() {
             </div>
           </div>
 
-          <DevNotice k="dev.catalog" className="mt-6" compact />
+          <BotonImagenRealista modelo="tuuci" className="mt-6" />
+
+          <DevNotice k="dev.catalog" className="mt-4" compact />
 
           <button
             onClick={() => {

@@ -19,6 +19,7 @@ import { Modal } from '@/components/ui/modal'
 import { DevNotice } from '@/components/DevNotice'
 import { useToast } from '@/components/ui/toast'
 import { OrderForm, type DatosPedido } from './OrderForm'
+import { BotonImagenRealista } from '@/features/imagen/BotonImagenRealista'
 import { leerThumbnail } from './thumbnail'
 import { SolsticeArt, TuuciArt } from '@/features/configurator/ModelPreviewArt'
 import { KEY_SOLSTICE, KEY_TUUCI } from '@/features/configurator/useConfig'
@@ -234,6 +235,8 @@ export default function DespiecePage() {
             {t('bom.pdf')}
           </Button>
         </motion.div>
+
+        <BotonImagenRealista modelo={modelo} className="mt-3 sm:h-12" />
 
         <DevNotice k="dev.pdf" className="mt-5" />
       </main>
