@@ -3,12 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useSession } from '@/lib/session'
+import { HOME } from '@/lib/rutas'
 import { useT } from '@/lib/i18n'
 import { useToast } from '@/components/ui/toast'
 import { cn } from '@/lib/utils'
 import type { Rol } from '@/types'
-
-const HOME: Record<Rol, string> = { config: '/configurador', admin: '/admin' }
 
 /**
  * Cambia de rol en vivo, sin logout: resetea a la vista default del rol

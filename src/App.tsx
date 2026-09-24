@@ -6,6 +6,7 @@ import { PageLoader } from '@/components/shell/PageLoader'
 import { WelcomeModal } from '@/features/propuesta/WelcomeModal'
 import { BarraPreview } from '@/features/propuesta/BarraPreview'
 import { NotFound } from '@/components/shell/NotFound'
+import { ENTRADA, HOME } from '@/lib/rutas'
 import type { Rol } from '@/types'
 
 const ModelSelect = lazy(() => import('@/features/configurator/ModelSelect'))
@@ -19,10 +20,7 @@ const Dashboard = lazy(() => import('@/features/admin/Dashboard'))
 const Empresas = lazy(() => import('@/features/admin/Empresas'))
 const Pedidos = lazy(() => import('@/features/admin/Pedidos'))
 
-/** Vista por defecto de cada rol dentro de la app. */
-const HOME: Record<Rol, string> = { config: '/configurador', admin: '/admin' }
-/** Después de iniciar sesión los dos roles aterrizan en la propuesta. */
-export const ENTRADA = '/propuesta'
+
 
 /** Exige sesión, sin importar el rol: lo usa la capa comercial. */
 function SoloSesion({ children }: { children: React.ReactNode }) {

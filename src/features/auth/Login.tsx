@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input, Label } from '@/components/ui/input'
 import { useT } from '@/lib/i18n'
 import { useSession, verificarCredenciales } from '@/lib/session'
+import { ENTRADA } from '@/lib/rutas'
 import { whatsappConsulta } from '@/lib/whatsapp'
 import { cn } from '@/lib/utils'
 
@@ -32,7 +33,8 @@ export default function Login() {
       return
     }
     login(s)
-    nav(s.rol === 'admin' ? '/admin' : '/configurador', { replace: true })
+    // Los dos roles entran por la propuesta: es la landing de la demo.
+    nav(ENTRADA, { replace: true })
   }
 
   return (
