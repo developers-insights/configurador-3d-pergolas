@@ -1,5 +1,5 @@
-import { LogOut } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { FileText, LogOut } from 'lucide-react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Brand } from './Brand'
 import { TopControls } from './Controls'
 import { RoleSwitcher } from './RoleSwitcher'
@@ -21,7 +21,24 @@ export function TopBar({ className }: { className?: string }) {
       )}
     >
       <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
-        <Brand size="sm" />
+        <div className="flex min-w-0 items-center gap-3 sm:gap-5">
+          <Brand size="sm" />
+          {/* Comercial · Propuesta: primer ítem del menú, en los dos roles */}
+          <NavLink
+            to="/propuesta"
+            className={({ isActive }) =>
+              cn(
+                'no-tap-highlight inline-flex h-8 items-center gap-1.5 rounded-lg px-2.5 text-xs font-medium transition-colors',
+                isActive
+                  ? 'bg-accent text-foreground'
+                  : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+              )
+            }
+          >
+            <FileText className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">{t('nav.propuesta')}</span>
+          </NavLink>
+        </div>
         <div className="flex items-center gap-1.5 sm:gap-2">
           {sesion && (
             <span className="hidden max-w-[180px] truncate text-xs text-muted-foreground lg:block">

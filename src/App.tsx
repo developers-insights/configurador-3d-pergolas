@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Login from '@/features/auth/Login'
 import { useSession } from '@/lib/session'
 import { PageLoader } from '@/components/shell/PageLoader'
+import { WelcomeModal } from '@/features/propuesta/WelcomeModal'
 import { NotFound } from '@/components/shell/NotFound'
 import type { Rol } from '@/types'
 
@@ -10,12 +11,24 @@ const ModelSelect = lazy(() => import('@/features/configurator/ModelSelect'))
 const SolsticeConfigurator = lazy(() => import('@/features/configurator/SolsticeConfigurator'))
 const TuuciConfigurator = lazy(() => import('@/features/configurator/TuuciConfigurator'))
 const Despiece = lazy(() => import('@/features/despiece/DespiecePage'))
+const Propuesta = lazy(() => import('@/features/propuesta/PropuestaPage'))
 const AdminLayout = lazy(() => import('@/features/admin/AdminLayout'))
 const Dashboard = lazy(() => import('@/features/admin/Dashboard'))
 const Empresas = lazy(() => import('@/features/admin/Empresas'))
 const Pedidos = lazy(() => import('@/features/admin/Pedidos'))
 
+/** Vista por defecto de cada rol dentro de la app. */
 const HOME: Record<Rol, string> = { config: '/configurador', admin: '/admin' }
+/** Después de iniciar sesión los dos roles aterrizan en la propuesta. */
+export const ENTRADA = '/propuesta'
+
+/** Exige sesión, sin importar el rol: lo usa la capa comercial. */
+function SoloSesion({ children }: { children: React.ReactNode }) {
+  const { sesion } = useSession()
+  const loc = useLocation()
+  if (!sesion) return <Navigate to="/login" replace state={{ from: loc.pathname }} />
+  return <>{children}</>
+}
 
 /** Exige sesión y, además, que el rol activo sea el correcto para la sección. */
 function Guard({ rol, children }: { rol: Rol; children: React.ReactNode }) {
@@ -30,13 +43,22 @@ export default function App() {
   const { sesion } = useSession()
 
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route
-          path="/login"
-          element={sesion ? <Navigate to={HOME[sesion.rol]} replace /> : <Login />}
-        />
-        <Route path="/" element={<Navigate to={sesion ? HOME[sesion.rol] : '/login'} replace />} />
+    <>
+      {sesion && <WelcomeModal />}
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/login" element={sesion ? <Navigate to={ENTRADA} replace /> : <Login />} />
+          <Route path="/" element={<Navigate to={sesion ? ENTRADA : '/login'} replace />} />
+
+          {/* ── Capa comercial: visible para los dos roles ──────────────── */}
+          <Route
+            path="/propuesta"
+            element={
+              <SoloSesion>
+                <Propuesta />
+              </SoloSesion>
+            }
+          />
 
         {/* ── Sección 1 y 2: configurador + despiece ───────────────────── */}
         <Route
@@ -87,7 +109,8 @@ export default function App() {
         </Route>
 
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+        </Routes>
+      </Suspense>
+    </>
   )
 }

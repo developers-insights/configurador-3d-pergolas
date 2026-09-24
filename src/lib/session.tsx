@@ -28,6 +28,8 @@ export function verificarCredenciales(usuario: string, pass: string): Sesion | n
 }
 
 export const EMPRESA_DEMO = CREDENCIALES.empresa.empresa
+/** El proveedor de materiales: el destinatario de la propuesta. */
+export const PROVEEDOR_DEMO = CREDENCIALES.admin.empresa
 
 export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [sesion, setSesion] = useState<Sesion | null>(() =>

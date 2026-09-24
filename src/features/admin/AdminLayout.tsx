@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LayoutDashboard, LogOut, Menu, Package, Users, X } from 'lucide-react'
+import { FileText, LayoutDashboard, LogOut, Menu, Package, Users, X } from 'lucide-react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { Brand, PoweredBy } from '@/components/shell/Brand'
 import { TopControls } from '@/components/shell/Controls'
@@ -8,10 +8,20 @@ import { useSession } from '@/lib/session'
 import { useT } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
-const LINKS = [
-  { to: '/admin', end: true, key: 'admin.dashboard', Icon: LayoutDashboard },
-  { to: '/admin/empresas', end: false, key: 'admin.users', Icon: Users },
-  { to: '/admin/pedidos', end: false, key: 'admin.orders', Icon: Package },
+/** El menú arranca por la capa comercial y sigue con la operación. */
+const GRUPOS = [
+  {
+    tituloKey: 'nav.comercial',
+    items: [{ to: '/propuesta', end: true, key: 'nav.propuesta', Icon: FileText }],
+  },
+  {
+    tituloKey: 'admin.panel',
+    items: [
+      { to: '/admin', end: true, key: 'admin.dashboard', Icon: LayoutDashboard },
+      { to: '/admin/empresas', end: false, key: 'admin.users', Icon: Users },
+      { to: '/admin/pedidos', end: false, key: 'admin.orders', Icon: Package },
+    ],
+  },
 ] as const
 
 export default function AdminLayout() {
@@ -28,30 +38,37 @@ export default function AdminLayout() {
         <Brand size="sm" />
       </div>
 
-      <nav className="flex-1 space-y-1 px-3">
-        {LINKS.map(({ to, end, key, Icon }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={end}
-            onClick={() => setAbierto(false)}
-            className={({ isActive }) =>
-              cn(
-                'no-tap-highlight flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
-                isActive
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-muted-foreground hover:bg-accent hover:text-foreground',
-              )
-            }
-          >
-            <Icon className="h-4 w-4 shrink-0" />
-            <span className="flex-1 truncate">{t(key)}</span>
-            {key === 'admin.orders' && nuevos > 0 && (
-              <span className="num rounded-full bg-[#1FA2FF] px-1.5 py-0.5 text-[10px] font-bold text-white">
-                {nuevos}
-              </span>
-            )}
-          </NavLink>
+      <nav className="flex-1 space-y-5 px-3">
+        {GRUPOS.map((grupo) => (
+          <div key={grupo.tituloKey} className="space-y-1">
+            <p className="px-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground/70">
+              {t(grupo.tituloKey)}
+            </p>
+            {grupo.items.map(({ to, end, key, Icon }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                onClick={() => setAbierto(false)}
+                className={({ isActive }) =>
+                  cn(
+                    'no-tap-highlight flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                  )
+                }
+              >
+                <Icon className="h-4 w-4 shrink-0" />
+                <span className="flex-1 truncate">{t(key)}</span>
+                {key === 'admin.orders' && nuevos > 0 && (
+                  <span className="num rounded-full bg-[#1FA2FF] px-1.5 py-0.5 text-[10px] font-bold text-white">
+                    {nuevos}
+                  </span>
+                )}
+              </NavLink>
+            ))}
+          </div>
         ))}
       </nav>
 

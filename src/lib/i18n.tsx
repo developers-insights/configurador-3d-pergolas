@@ -353,6 +353,27 @@ export const DICT: Record<string, [string, string]> = {
     'Account, role and permission settings are simulated in this preview.',
   ],
 
+
+  // ── Navegación comercial ─────────────────────────────────────────────────
+  'nav.comercial': ['Comercial', 'Commercial'],
+  'nav.propuesta': ['Propuesta', 'Proposal'],
+
+  // ── Welcome modal ────────────────────────────────────────────────────────
+  'welcome.hi': ['Hola {nombre} 👋', 'Hi {nombre} 👋'],
+  'welcome.intro': [
+    'Somos Juan y Fede de Insights. Construimos este MVP para que veas tu plataforma funcionando antes de invertir.',
+    'We\u2019re Juan and Fede from Insights. We built this MVP so you can see your platform working before investing.',
+  ],
+  'welcome.body': [
+    'Tus empresas de pérgolas van a poder configurar en 3D la pérgola del cliente, generar la imagen realista de cómo quedaría, y al confirmar reciben el despiece exacto de materiales que te llega como pedido a tu panel.',
+    'Your pergola companies will be able to configure the client\u2019s pergola in 3D, generate a realistic image of how it would look, and on confirmation they get the exact bill of materials that reaches your panel as an order.',
+  ],
+  'welcome.close': [
+    'Si te gusta lo que ves, hacé clic en «Quiero arrancar» y arrancamos.',
+    'If you like what you see, click «I want to start» and we get going.',
+  ],
+  'welcome.cta': ['Ver la plataforma', 'See the platform'],
+
   // ── Varios ───────────────────────────────────────────────────────────────
   'misc.soon': ['Disponible al desarrollar', 'Available once developed'],
   'misc.close': ['Cerrar', 'Close'],
@@ -369,7 +390,8 @@ export const DICT: Record<string, [string, string]> = {
   'misc.goHome': ['Ir al inicio', 'Go home'],
 }
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: string) => string }
+type Vars = Record<string, string | number>
+type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: string, vars?: Vars) => string }
 const LangCtx = createContext<Ctx | null>(null)
 
 export function LangProvider({ children }: { children: React.ReactNode }) {
@@ -393,10 +415,13 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
 
   const setLang = useCallback((l: Lang) => setLangState(l), [])
   const t = useCallback(
-    (k: string) => {
+    (k: string, vars?: Vars) => {
       const entry = DICT[k]
       if (!entry) return k
-      return lang === 'es' ? entry[0] : entry[1]
+      const txt = lang === 'es' ? entry[0] : entry[1]
+      if (!vars) return txt
+      // Reemplaza {nombre} y demás marcadores del diccionario.
+      return txt.replace(/\{(\w+)\}/g, (m, key) => (key in vars ? String(vars[key]) : m))
     },
     [lang],
   )
